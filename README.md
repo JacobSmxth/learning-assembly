@@ -1,2 +1,2 @@
 # learning-assembly
-My journy through learning assembly
+My journey through learning assembly
