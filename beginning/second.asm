@@ -1,4 +1,5 @@
-;; Simple bootloader "Hello, World!"
+;; Type a word thing
+
 
 format binary as 'iso'
 
@@ -20,7 +21,6 @@ retf
 
 
 
-
 _start:
   mov ah, 0x0
   int 0x10
@@ -33,11 +33,11 @@ _start:
   ;mov al, 'e'
   ;int 0x10
 
-  mov bx, _msgHW
 
 _printLoop:
-  mov al, [bx]
-  cmp al, 0
+  mov ah, 0x0
+  int 0x16
+  cmp al, 27
   jz _haltLoop
 
   mov ah, 0x0e
@@ -45,11 +45,10 @@ _printLoop:
   add bx, 1
   jmp _printLoop
 
+
+
 _haltLoop:
   jmp $
-
-_msgHW:
-  db "This is my first working, and self-made, critically thunken about, and working bootloader display text.", 0
 
 
 
