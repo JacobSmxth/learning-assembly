@@ -1,6 +1,4 @@
-
-format binary as 'iso'
-
+format binary as 'bin'
 use16
 
 ORG 0x7C00
@@ -59,10 +57,6 @@ jz _halt
 
 mov ah, 0x0
 jmp _inputLoop
-
-
-
-
 
 _askName:
 call ClearScreen
@@ -138,11 +132,7 @@ mov ah, 0x0e
 mov al, 0x0a
 int 0x10
 
-
-mov bx, Continue
-call PrintLoop
-mov ah, 0x0
-int 0x16
+call PauseScreen
 jmp _menu
 
 _hardcodedInfo:
@@ -155,6 +145,7 @@ mov al, 0x0a
 int 0x10
 mov bx, HardCoded
 call PrintLoop
+call PauseScreen
 jmp _menu
 
 
@@ -195,6 +186,15 @@ int 0x10
 ret
 
 
+PauseScreen:
+mov bx, Continue
+call PrintLoop
+mov ah, 0x0
+int 0x16
+ret
+
+
+
 ; Hard Coded Texts
 
 MenuOne: db "1. Enter Name", 0x0d, 0x0a, 0
@@ -218,5 +218,5 @@ Hello: db "Hello, ", 0
 HaltMsg: db "Halting system...", 0
 
 
-times 510-($-$$) db 0
+; times 510-($-$$) db 0
 dw 0xAA55
